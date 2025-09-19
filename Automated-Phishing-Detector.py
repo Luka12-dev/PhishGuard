@@ -375,7 +375,7 @@ class MainWindow(QMainWindow):
     # Debounce real-time
     def on_realtime_toggled(self):
         if self.rt_checkbox.isChecked():
-            self.log_msg('Real-time enabled — edits will trigger analysis after a short pause')
+            self.log_msg('Real-time enabled - edits will trigger analysis after a short pause')
         else:
             self.log_msg('Real-time disabled')
 
@@ -389,7 +389,6 @@ class MainWindow(QMainWindow):
     # Analysis flow
     def _build_initial_model(self):
         examples = build_synthetic_examples()
-        # train in main thread quickly (small dataset) — keep progress bar minimal
         try:
             texts = [preprocess(t) for t in examples['text']]
             y = examples['label']
@@ -417,7 +416,7 @@ class MainWindow(QMainWindow):
         self.pipeline = pipeline
         self.progress.setValue(0)
         self.set_status('Trained model', ok=True)
-        self.log_msg('Training finished — model is ready')
+        self.log_msg('Training finished - model is ready')
 
     def on_analyze_now(self):
         text = (self.input_subject.text().strip() + ' ' + self.input_body.toPlainText().strip()).strip()
@@ -455,7 +454,7 @@ class MainWindow(QMainWindow):
                 lines.append(f"{t}  ({sign}{abs(round(c,4))})")
             self.tokens_box.setPlainText('\n'.join(lines) if lines else 'No strong token contributions detected')
             self.set_status('Model ready', ok=True)
-            self.log_msg(f'Analysis finished — {label} ({pct}%)')
+            self.log_msg(f'Analysis finished - {label} ({pct}%)')
         except Exception as e:
             self.log_msg('Prediction handling error: ' + str(e))
         finally:
@@ -463,7 +462,7 @@ class MainWindow(QMainWindow):
 
     def _on_worker_error(self, tb):
         self.set_status('Worker error', ok=False)
-        QMessageBox.critical(self, 'Worker error', 'A background operation failed — see log for details')
+        QMessageBox.critical(self, 'Worker error', 'A background operation failed - see log for details')
         self.log_msg('Worker thread failed:\n' + str(tb))
 
     # File / model operations
@@ -518,4 +517,4 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     win = MainWindow()
     win.show()
-    sys.exit(app.exec())
+    sys.exit(app.exec()
